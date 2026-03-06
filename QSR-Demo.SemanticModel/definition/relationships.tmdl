@@ -1,0 +1,5 @@
+relationship f427bbcd-d9cf-485e-adc0-d1d8eb4e8cd7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Sheet1.transactiondate
+	toColumn: LocalDateTable_ce85bf91-fecd-463d-87ce-12a6221785e1.Date
+

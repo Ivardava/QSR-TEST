@@ -1,0 +1,51 @@
+table Sheet1
+	lineageTag: 82d3509b-b6a0-44e1-868e-e4f14e438242
+
+	column reportingid
+		dataType: int64
+		formatString: 0
+		lineageTag: 9839485c-ad1e-4939-99de-7654f56afad4
+		summarizeBy: sum
+		sourceColumn: reportingid
+
+		annotation SummarizationSetBy = Automatic
+
+	column transactiondate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 21e8a207-38a0-4514-95db-38ecaeeea9e3
+		summarizeBy: none
+		sourceColumn: transactiondate
+
+		variation Variation
+			isDefault
+			relationship: f427bbcd-d9cf-485e-adc0-d1d8eb4e8cd7
+			defaultHierarchy: LocalDateTable_ce85bf91-fecd-463d-87ce-12a6221785e1.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column totalamount
+		dataType: double
+		lineageTag: ebbb45b0-4592-440b-bbac-b5bfd6987e1e
+		summarizeBy: sum
+		sourceColumn: totalamount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Sheet1 = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\gioivard\OneDrive - Publicis Groupe\Desktop\Mcdonalds\GitHub\Power BI\QSR-DEV\Sales Sample File 2025.xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"reportingid", Int64.Type}, {"transactiondate", type date}, {"totalamount", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

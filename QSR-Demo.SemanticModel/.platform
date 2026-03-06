@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "QSR-Demo"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "4644ded1-e7e1-4b62-8d37-9d728b2a91b9"
+  }
+}
